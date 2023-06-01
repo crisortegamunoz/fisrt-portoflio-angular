@@ -1,0 +1,52 @@
+<a mat-raised-button routerLink="create">Add Project</a>
+    <mat-form-field>
+      <input matInput (keyup)="onFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 project-table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> N° </th>
+          <td mat-cell *matCellDef="let project"> {{ project.id }} </td>
+        </ng-container>
+        <ng-container matColumnDef="important">
+          <th mat-header-cell *matHeaderCellDef> Important </th>
+          <td mat-cell *matCellDef="let project"> {{ project.priority | importantInfo }} </td>
+        </ng-container>
+        <ng-container matColumnDef="projectName">
+          <th mat-header-cell *matHeaderCellDef> Project Name </th>
+          <td mat-cell *matCellDef="let project"> {{ project.name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="businessCategory">
+          <th mat-header-cell *matHeaderCellDef> Business Category </th>
+          <td mat-cell *matCellDef="let project"> {{ project.category }} </td>
+        </ng-container>
+        <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let project"> {{ project.position }} </td>
+        </ng-container>
+        <ng-container matColumnDef="descriptionOne">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let project"> {{ project.aboutProjectOne | slice: 0:30 }}... </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let project"> 
+              <a mat-icon-button [routerLink]="['edit', project.id]"><mat-icon>edit</mat-icon></a>
+              <button mat-icon-button color="warn" (click)="deleteProject(project)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="mat-elevation-z8 pagination" 
+                   #paginator
+                   [length]="totalRecords"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   (page)="pageEvent = findByPage($event)">
+      </mat-paginator>
+
+<ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

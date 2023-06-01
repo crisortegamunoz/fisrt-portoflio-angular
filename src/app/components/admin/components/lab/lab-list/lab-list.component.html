@@ -1,0 +1,40 @@
+<a mat-raised-button routerLink="create">Add Lab Project</a>
+    <mat-form-field>
+      <input matInput (keyup)="onFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 lab-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> N° </th>
+        <td mat-cell *matCellDef="let laboratory"> {{ laboratory.id }} </td>
+      </ng-container>
+        <ng-container matColumnDef="projectName">
+          <th mat-header-cell *matHeaderCellDef> Project Name </th>
+          <td mat-cell *matCellDef="let laboratory"> {{ laboratory.name }} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let laboratory"> {{ laboratory.laboratoryDescription | slice: 0:60 }}... </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let laboratory"> 
+              <a mat-icon-button [routerLink]="['edit', laboratory.id]"><mat-icon>edit</mat-icon></a>
+              <button mat-icon-button color="warn" (click)="deleteProject(laboratory)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="mat-elevation-z8 pagination" 
+                   #paginator
+                   [length]="totalRecords"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   (page)="pageEvent = findByPage($event)">
+      </mat-paginator>
+
+<ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

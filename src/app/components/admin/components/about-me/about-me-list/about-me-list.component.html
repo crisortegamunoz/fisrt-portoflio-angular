@@ -1,0 +1,42 @@
+<a mat-raised-button routerLink="create">Add Information</a>
+
+  <mat-form-field>
+    <input matInput (keyup)="onFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 aboutme-table">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> N° </th>
+        <td mat-cell *matCellDef="let aboutme"> {{ aboutme.id }} </td>
+      </ng-container>
+        <ng-container matColumnDef="descriptionTitle">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let aboutme"> {{ aboutme.descriptionTitle }} </td>
+        </ng-container>
+        <ng-container matColumnDef="descriptionOne">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let aboutme"> {{ aboutme.descriptionOne | slice:0:160}}... </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let aboutme"> 
+              <a mat-icon-button [routerLink]="['edit', aboutme.id]"><mat-icon>edit</mat-icon></a>
+              <button mat-icon-button color="warn" (click)="deleteInformation(aboutme)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="mat-elevation-z8 pagination" 
+                   #paginator
+                   [length]="totalRecords"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   (page)="pageEvent = findByPage($event)">
+      </mat-paginator>
+
+
+<ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

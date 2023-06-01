@@ -1,0 +1,49 @@
+<section id="about" class="about-area bg-f5eded ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="about-content">
+                    <h2>Sobre Mí</h2>
+                    <h5>{{ aboutMe.descriptionTitle }}</h5>
+                    <p>{{ aboutMe.descriptionOne }}</p>
+                    <div class="swiper-container pointer" (click)="slideChange()">
+                        <div class="swiper-wrapper">
+                          <div class="swiper-slide" *ngFor="let img of images">
+                            <img [src]="img" alt="imagen del banner">
+                          </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <p>{{ aboutMe.descriptionTwo }}</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12">
+                <div class="about-info">
+                    <div class="d-table">
+                        <div class="d-table-cell">
+                            <ul>
+                                <li>
+                                    Nombre:
+                                    <span>Cristian Ortega Muñoz</span>
+                                </li>
+                                <li>
+                                    Email:
+                                    <span><a href="mailto:contacto@cristianortega.com" class="email">contacto@cristianortega.com</a></span>
+                                </li>
+                                <li>
+                                    Cargo:
+                                    <span>FullStack Developer</span>
+                                </li>
+                                <li>
+                                    Teléfono:
+                                    <span class="pointer" (click)="onWhatsappWindow()">+56 9 9643 6811</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

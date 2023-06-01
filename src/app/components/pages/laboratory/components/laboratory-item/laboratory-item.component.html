@@ -1,0 +1,12 @@
+<div class="single-featured-videos-box smooth" (click)="onGetProjectInformation(laboratory.id)">
+    <div class="videos-image shadow">
+        <img [src]="laboratory.image">
+    </div>
+
+    <div class="videos-content">
+        <h3><a class="popup-youtube">{{laboratory.name}}</a></h3>
+        <ul class="videos-meta">
+            <li>{{ laboratory.creation | daysOfPublished }}</li>
+        </ul>
+    </div>
+</div>

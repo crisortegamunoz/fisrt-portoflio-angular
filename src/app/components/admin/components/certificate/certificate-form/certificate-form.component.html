@@ -1,0 +1,89 @@
+<div *ngIf="loading" class='lmask'></div>
+
+<form [formGroup]="certificateForm" (ngSubmit)="saveCertificateProccess($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>New Certificate</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <input type="hidden" formControlName="id">
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <input placeholder="Course" formControlName="course" matInput type="text">
+            </mat-form-field>
+            <div class="attribute-required" *ngIf="certificateForm.get('course').errors && certificateForm.get('course').dirty">
+              <p *ngIf="certificateForm.get('course').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <input placeholder="Code" formControlName="code" matInput type="text">
+            </mat-form-field>
+            <div class="attribute-required" *ngIf="certificateForm.get('code').errors && certificateForm.get('code').dirty">
+              <p *ngIf="certificateForm.get('code').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+              <mat-form-field class="admin-form-width">
+                  <mat-label>Category</mat-label>
+                  <mat-select formControlName="category">
+                      <mat-option *ngFor="let cat of categories" [value]="cat">
+                          {{ cat }}
+                      </mat-option>
+                      </mat-select>
+              </mat-form-field>
+            <div class="attribute-required" *ngIf="certificateForm.get('category').errors && certificateForm.get('category').dirty">
+              <p *ngIf="certificateForm.get('category').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+              <mat-form-field class="admin-form-width">
+                  <mat-label>Learning Platform</mat-label>
+                  <mat-select formControlName="learningPlatform">
+                      <mat-option *ngFor="let entities of educationalEntities" [value]="entities">
+                          {{ entities }}
+                      </mat-option>
+                      </mat-select>
+              </mat-form-field>
+            <div class="attribute-required" *ngIf="certificateForm.get('learningPlatform').errors && certificateForm.get('learningPlatform').dirty">
+              <p *ngIf="certificateForm.get('learningPlatform').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="date-form-width">
+                <input matInput [matDatepicker]="picker" placeholder="Approved Date" formControlName="approved">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <div class="attribute-required" *ngIf="certificateForm.get('approved').errors && certificateForm.get('approved').dirty">
+                <p *ngIf="certificateForm.get('approved').hasError('required')">this field is required</p>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+                <div class="container-input-file">
+                    <label class="custom-file">
+                      <input class="upload" type="file" formControlName="image" (change)="handleImage($event)" />
+                      <mat-icon>cloud_upload</mat-icon><span>CHOOSE IMAGE</span>
+                    </label>
+                  </div>
+            </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="certificateForm.invalid || loading" mat-raised-button type="submit">Guardar</button>
+      </mat-card-actions>
+    </mat-card>
+    
+  </form>
+  

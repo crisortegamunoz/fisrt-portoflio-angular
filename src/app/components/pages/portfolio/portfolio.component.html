@@ -1,0 +1,28 @@
+<div *ngIf="loading" class='lmask'></div>
+
+<section id="videos" class="featured-videos-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title pages">
+            <h2>Proyectos profesionales</h2>
+        </div>
+
+        <div class="text-center" *ngIf="technologyNotFound">
+            <p class="no-data-found">{{ message }}</p>
+        </div>
+
+        <div class="row">
+            <app-portfolio-items class="col-lg-4 col-sm-6 col-md-6" 
+                                 *ngFor="let project of asyncPortfolioList | async | paginate: { id: 'portfolioGrid', 
+                                                                                                 itemsPerPage: pageSize, 
+                                                                                                 currentPage: currentPage, 
+                                                                                                 totalItems: totalRecords }" 
+                                                                                                 [project]="project">
+            </app-portfolio-items>
+        </div>
+
+        <div class="text-center" *ngIf="totalRecords > pageSize">
+            <pagination-controls (pageChange)="pageChanged($event)" previousLabel='Anterior' nextLabel='Siguiente' id='portfolioGrid'></pagination-controls>
+        </div>
+        
+    </div>
+</section>

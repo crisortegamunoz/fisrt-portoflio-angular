@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "portfolio-crisortega": {
+      "hosting": {
+        "portfolio": [
+          "portfolio-crisortega"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "portfolio-crisortega"
+  }
+}

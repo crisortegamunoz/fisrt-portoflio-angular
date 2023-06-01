@@ -1,0 +1,55 @@
+<div *ngIf="loading" class='lmask'></div>
+
+<section class="blog-details-area ptb-100" *ngIf="project">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 offset-lg-2">
+                <div class="blog-details-header">
+                    <h3>{{ project.name }}</h3>
+                    <div class="entry-meta">
+                        <ul>
+                            <li>
+                                <i class='flaticon-categories'></i>
+                                <span>Categoría:</span>
+                                <a routerLink="/portfolio">Portafolio</a>
+                            </li>
+                            <li>
+                                <i class='flaticon-calendar'></i>
+                                <span>Publicado el:</span>
+                                <a>{{ project.creation | date: 'dd/MM/yyyy' }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="blog-details-desc">
+                    <div class="article-content">
+                        <h5>Descripción breve del proyecto.</h5>
+                        <p>{{ project.aboutProjectOne }}</p>
+
+                        <div *ngIf="descriptionList.length > 0">
+                            <h5>Experencia durante el desarrollo.</h5>
+                            <div *ngFor="let descrip of descriptionList">
+                                    <br *ngIf="descrip.toString() === ''" />
+                                    <p *ngIf="descrip.toString() !== ''">{{descrip}}</p>
+                            </div>
+                        </div>
+
+                        <b>Nota: Por motivos de privacidad, relacionados con la empresa, no puedo presentar imágenes del aplicativo.</b>
+                        
+                    </div>
+                    
+                    <div class="article-footer">
+                        <div class="article-tags">
+                            <span><i class='flaticon-promotion'></i></span>
+
+                            <a class="category" (click)="onSearchByTechnology(technology.technologyName)" *ngFor="let technology of technologyList; let i=index;">
+                                {{technology | addComma: i : technologyList.length}} 
+                            </a> 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

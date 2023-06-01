@@ -1,0 +1,89 @@
+<div *ngIf="saving" class='lmask'></div>
+
+<form [formGroup]="laboratoryForm" (ngSubmit)="saveLaboratoryProccess($event)" *ngIf="technologyArray.length > 0 else loading">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>New Lab Project</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <input type="hidden" formControlName="id">
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <input placeholder="Project Name" formControlName="name" matInput type="text">
+            </mat-form-field>
+            <div class="attribute-required" *ngIf="laboratoryForm.get('name').errors && laboratoryForm.get('name').dirty">
+              <p *ngIf="laboratoryForm.get('name').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="admin-form-width">
+                <textarea matInput placeholder="Description" formControlName="laboratoryDescription"></textarea>
+              </mat-form-field>
+              <div class="attribute-required" *ngIf="laboratoryForm.get('laboratoryDescription').errors && laboratoryForm.get('laboratoryDescription').dirty">
+                <p *ngIf="laboratoryForm.get('laboratoryDescription').hasError('required')">this field is required</p>
+              </div>
+            </div>
+        </div>
+
+        <div class="row" >
+          <div class="col-xs">
+            
+            <div formArrayName="technologyList">
+              <p>Add Technology <button mat-icon-button color="primary" (click)="addTechnology()"><mat-icon>add_circle</mat-icon></button></p>
+
+              <div *ngFor="let alias of technologyList.controls; let i=index">
+                <mat-form-field class="admin-form-width">
+                  <mat-label>Technology</mat-label>
+                  <mat-select [formControlName]="i">
+                      <mat-option *ngFor="let tecnology of technologyArray" [value]="tecnology">
+                          {{ tecnology.technologyName }}
+                      </mat-option>
+                      </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="admin-form-width">
+                <input placeholder="URL Repository" formControlName="urlRepo" matInput type="text">
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+              <mat-form-field class="admin-form-width">
+                <input placeholder="URL Demo" formControlName="urlDemo" matInput type="text">
+              </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs">
+                <div class="container-input-file">
+                    <label class="custom-file">
+                      <input class="upload" type="file" formControlName="image" (change)="handleImage($event)" />
+                      <mat-icon>cloud_upload</mat-icon><span>CHOOSE IMAGE</span>
+                    </label>
+                  </div>
+            </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="laboratoryForm.invalid || saving" mat-raised-button type="submit">Guardar</button>
+      </mat-card-actions>
+    </mat-card>
+    
+  </form>
+
+  <ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+  

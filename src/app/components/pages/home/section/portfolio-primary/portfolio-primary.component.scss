@@ -1,0 +1,16 @@
+.videos-image {
+    overflow: hidden
+}
+
+.single-featured-videos-box:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1240px) {
+    .videos-image img {
+        min-height:475px;
+        width: auto;
+        max-width: inherit;
+    }
+}

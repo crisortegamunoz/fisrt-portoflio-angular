@@ -1,0 +1,50 @@
+<a mat-raised-button routerLink="create">Add Certificate</a>
+
+  <mat-form-field>
+    <input matInput (keyup)="onFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+    <table class="mat-elevation-z8 certificate-table" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+        <td mat-cell *matCellDef="let certificate"> {{ certificate.id }} </td>
+      </ng-container>
+        <ng-container matColumnDef="course">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Course </th>
+          <td mat-cell *matCellDef="let certificate"> {{ certificate.course }} </td>
+        </ng-container>
+        <ng-container matColumnDef="learningPlatform">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Educational Entity </th>
+          <td mat-cell *matCellDef="let certificate"> {{ certificate.learningPlatform }} </td>
+        </ng-container>
+        <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+            <td mat-cell *matCellDef="let certificate"> {{ certificate.category }} </td>
+        </ng-container>
+        <ng-container matColumnDef="approved">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Approved </th>
+            <td mat-cell *matCellDef="let certificate"> {{ certificate.approved | date: 'dd-MM-yyyy'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let certificate"> 
+            <a mat-icon-button [routerLink]="['edit', certificate.id]"><mat-icon>edit</mat-icon></a>
+            <button mat-icon-button color="warn" (click)="deleteCertificate(certificate)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="mat-elevation-z8 pagination" 
+                   #paginator
+                   [length]="totalRecords"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   (page)="pageEvent = findByPage($event)">
+      </mat-paginator>
+
+
+<ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

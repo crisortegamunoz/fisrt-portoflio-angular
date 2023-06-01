@@ -1,0 +1,6 @@
+<div class="single-top-stories-box pointer" (click)="onSearchLaboratory(laboratory.id)">
+    <img [src]="laboratory.image" [alt]="laboratory.name">
+    <div class="content">
+        <h3>{{ laboratory.laboratoryDescription | slice:0:80 }}...</h3>
+    </div>
+</div>

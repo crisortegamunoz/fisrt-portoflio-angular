@@ -1,0 +1,28 @@
+.mat-toolbar {
+  background: #3b6978;
+  color: black;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 64px;
+  background: #3b6978;
+}
+
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  

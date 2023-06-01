@@ -1,0 +1,59 @@
+<div *ngIf="loading" class='lmask'></div>
+
+<section class="blog-details-area ptb-100" *ngIf="laboratory">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 offset-lg-2">
+                <div class="blog-details-header">
+                    <h3>{{ laboratory.name}}</h3>
+                    <div class="entry-meta">
+                        <ul>
+                            <li>
+                                <i class='flaticon-categories'></i>
+                                <span>Categoría:</span>
+                                <a routerLink="/laboratory">Laboratorio</a>
+                            </li>
+                            <li>
+                                <i class='flaticon-calendar'></i>
+                                <span>Publicado el:</span>
+                                <a>{{ laboratory.creation | date: 'dd/MM/yyyy' }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="blog-details-desc">
+                    <div class="article-content">
+
+                        <div *ngIf="descriptionList.length > 0">
+                            <h5>Descripción del proyecto</h5>
+                            <div *ngFor="let descrip of descriptionList">
+                                    <br *ngIf="descrip.toString() === ''" />
+                                    <p *ngIf="descrip.toString() !== ''">{{descrip}}</p>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div *ngIf="laboratory.urlRepo && laboratory.urlRepo !== ''">
+                            <a [href]="laboratory.urlRepo" target="_blank"><i class="fab fa-github"></i> Ir al repositorio.</a>
+                        </div>
+                        <div *ngIf="laboratory.urlDemo && laboratory.urlDemo !== ''">
+                            <a [href]="laboratory.urlDemo" target="_blank"><i class="fas fa-laptop-code"></i> Ver demo</a>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="article-footer">
+                        <div class="article-tags">
+                            <span><i class='flaticon-promotion'></i></span>
+
+                            <a class="category" (click)="onSearchByTechnology(technology.technologyName)" *ngFor="let technology of technologyList; let i=index;">
+                                {{technology | addComma: i : technologyList.length}} 
+                            </a> 
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,28 @@
+.whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+    background-color: white;
+    border-radius: 100px;
+    padding: 10px;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, .4);
+    cursor: pointer;
+}
+
+.whatsapp a {
+    text-decoration: none;
+}
+
+.whatsapp img {
+    width: 45px;
+}
+
+.whatsapp:hover, .whatsapp:focus {
+    transform: scale(1.1) !important;
+}
+
+.whatsapp p {
+    color: #001011;
+    font-weight: 400;
+}

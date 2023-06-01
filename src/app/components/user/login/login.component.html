@@ -1,0 +1,42 @@
+<div class="login-container">
+    <div class="row center-xs"> 
+      <form [formGroup]="form" class="col-xs-8 center-xs"  (ngSubmit)="onLogin(form.value)">
+        <mat-card class="login">
+          <mat-card-header>
+            <mat-card-title>Login</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="w-100">
+                  <input class="login-input" placeholder="email" formControlName="username" matInput type="email">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="w-100">
+                  <input class="login-input" placeholder="password" formControlName="password" matInput type="password">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <re-captcha (resolved)="resolved($event)" 
+                            formControlName="captcha" 
+                            siteKey="6LfyrMkZAAAAANi_nVyiASVyB8R2iwc2Z54MWwtI">  
+                </re-captcha>
+                <span *ngIf="captchaNotSelected" class="text-danger"></span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="text-center">
+              <button mat-raised-button type="submit" routerLink="/home">Volver atras</button>
+              <button mat-button color="primary" [disabled]="form.invalid" mat-raised-button type="submit">Ingresar<mat-icon>keyboard_arrow_right</mat-icon></button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+     </form>
+    </div>
+</div>

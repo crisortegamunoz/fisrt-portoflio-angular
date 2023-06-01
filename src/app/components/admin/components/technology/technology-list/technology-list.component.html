@@ -1,0 +1,41 @@
+<a mat-raised-button routerLink="create">Add Technology</a>
+
+  <mat-form-field>
+    <input matInput (keyup)="onFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+    <table class="mat-elevation-z8 technology-table" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+        <td mat-cell *matCellDef="let technology"> {{technology.id}} </td>
+      </ng-container>
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <td mat-cell *matCellDef="let technology"> {{technology.category}} </td>
+        </ng-container>
+        <ng-container matColumnDef="technologyName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+          <td mat-cell *matCellDef="let technology"> {{technology.technologyName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let technology"> 
+            <a mat-icon-button [routerLink]="['edit', technology.id]"><mat-icon>edit</mat-icon></a>
+            <button mat-icon-button color="warn" (click)="deleteTechnology(technology)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator class="mat-elevation-z8 pagination" 
+                   #paginator
+                   [length]="totalRecords"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="[5, 10, 15]"
+                   (page)="pageEvent = findByPage($event)">
+      </mat-paginator>
+
+<ng-template #loading>
+    <div class="container-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>

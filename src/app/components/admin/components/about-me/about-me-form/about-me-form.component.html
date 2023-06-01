@@ -1,0 +1,55 @@
+<form [formGroup]="aboutMeForm" (ngSubmit)="saveInformation($event)">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>New Personal Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <input type="hidden" formControlName="id">
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <input placeholder="Title" formControlName="descriptionTitle" matInput type="text">
+            </mat-form-field>
+            <div *ngIf="aboutMeForm.get('descriptionTitle').errors && aboutMeForm.get('descriptionTitle').dirty">
+              <p *ngIf="aboutMeForm.get('descriptionTitle').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <textarea matInput placeholder="Description 1" formControlName="descriptionOne"></textarea>
+            </mat-form-field>
+            <div *ngIf="aboutMeForm.get('descriptionOne').errors && aboutMeForm.get('descriptionOne').dirty">
+              <p *ngIf="aboutMeForm.get('descriptionOne').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <textarea matInput placeholder="Description 2" formControlName="descriptionTwo"></textarea>
+            </mat-form-field>
+            <div *ngIf="aboutMeForm.get('descriptionTwo').errors && aboutMeForm.get('descriptionTwo').dirty">
+              <p *ngIf="aboutMeForm.get('descriptionTwo').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs">
+            <mat-form-field class="admin-form-width">
+              <textarea matInput placeholder="Description 3" formControlName="descriptionThree"></textarea>
+            </mat-form-field>
+            <div *ngIf="aboutMeForm.get('descriptionThree').errors && aboutMeForm.get('descriptionThree').dirty">
+              <p *ngIf="aboutMeForm.get('descriptionThree').hasError('required')">this field is required</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button [disabled]="aboutMeForm.invalid" mat-raised-button type="submit">Guardar</button>
+      </mat-card-actions>
+    </mat-card>
+    
+  </form>
+  
